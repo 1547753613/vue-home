@@ -73,7 +73,10 @@
               console.log(data)
               if (data.code==200){
                 sessionStorage.setItem("menus",JSON.stringify(data.data.admin.menus));
+                sessionStorage.setItem("admin",JSON.stringify(data.data.admin))
                 this.$store.commit('SER_MENUS',data.data.admin.menus);
+                this.$store.commit('SET_ADMIN',data.data.admin);
+
                 this.$router.push({ path: '/' })
               }
 

@@ -11,7 +11,7 @@
 			</el-col>
 			<el-col :span="4" class="userinfo">
 				<el-dropdown trigger="hover">
-					<span class="el-dropdown-link userinfo-inner"><img :src="this.sysUserAvatar" /> {{sysUserName}}</span>
+					<span class="el-dropdown-link userinfo-inner"><img :src="admin.head" /> {{admin.name}}</span>
 					<el-dropdown-menu slot="dropdown">
 						<el-dropdown-item>我的消息</el-dropdown-item>
 						<el-dropdown-item>设置</el-dropdown-item>
@@ -23,7 +23,7 @@
    <el-col :span="24" class="main">
      <aside :class="collapsed?'menu-collapsed':'menu-expanded'">
        <!--导航菜单-->
-       <el-menu default-active="/404" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect"
+       <el-menu default-active="/dashboard" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect"
                 unique-opened router v-show="!collapsed"
                 >
          <template v-for="(item,index) in $router.options.routes" v-if="!item.hidden&&onTest(menus,item.children[0].name)||item.test">
@@ -34,7 +34,7 @@
            <el-menu-item v-if="item.leaf&&item.children.length>0" :index="item.children[0].path"><i :class="item.iconCls"></i>{{item.children[0].name}}</el-menu-item>
          </template>
        </el-menu>
-       <!--导航菜单-折叠后-->
+       <!--&lt;!&ndash;导航菜单-折叠后&ndash;&gt;
        <ul class="el-menu el-menu-vertical-demo collapsed" v-show="collapsed" ref="menuCollapsed">
          <li v-for="(item,index) in $router.options.routes" v-if="!item.hidden" class="el-submenu item">
            <template v-if="!item.leaf">
@@ -51,7 +51,7 @@
              </ul>
            </template>
          </li>
-       </ul>
+       </ul>-->
      </aside>
      <section class="content-container">
        <div class="grid-content bg-purple-light">
@@ -191,11 +191,11 @@
 			}
 		},
     computed: {
-      ...mapGetters(['menus'])
+      ...mapGetters(['menus','admin'])
 
     },
     created(){
-		  //console.log(this.menus)
+
     },
 		mounted() {
 

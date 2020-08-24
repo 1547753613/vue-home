@@ -12,7 +12,7 @@ import echarts from '../views/charts/echarts.vue'
 let routes = [
   {
     path:'/',
-    redirect: '/404',
+    redirect: '/dashboard',
     hidden:true
   },
   {
@@ -30,8 +30,9 @@ let routes = [
     test:true,
     leaf: true,
     children: [
-      { path:'/404',component:NotFound,name:'首页',hidden:true,test:true},
+      { path:'/dashboard',component:() => import('@/views/dashboard/dashboard'),name:'首页',hidden:true,test:true},
       { path: '/401', component: () => import('@/views/401'), name: 'page401'},
+      {path:'/404',component:NotFound,name:'404'},
       { path: '/main', component: Main, name: '主页' },
       { path: '/form', component: Form, name: 'Form'}
 
@@ -85,6 +86,28 @@ let routes = [
     leaf: true,//只有一个节点
     children: [
       {path:'/consult ',component:()=>import('@/views/user/select'),name:'咨询管理'}
+    ]
+  },
+  {
+    path: '/',
+    component: Home,
+    name: '',
+    iconCls: 'el-icon-s-tools',
+    leaf: true,//只有一个节点
+    children: [
+      {path:'/consult ',component:()=>import('@/views/user/select'),name:'咨询管理'}
+
+    ]
+  },
+  {
+    path: '/',
+    component: Home,
+    name: '',
+    iconCls: 'el-icon-s-tools',
+    leaf: true,//只有一个节点
+    children: [
+      {path:'/authority ',component:()=>import('@/views/authority'),name:'权限管理'}
+
     ]
   },
 

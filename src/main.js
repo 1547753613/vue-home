@@ -32,9 +32,10 @@ router.beforeEach((to, from, next) => {
   }
 
   let menus=store.getters.menus;
-  let router=['/404','/login']
+  let router=['/404','/login','/dashboard']
 
   if (router.indexOf(to.path)==-1){
+
     if (menus!=null&&to.path!='/401'){
       let bol=test(menus,to.name);
 

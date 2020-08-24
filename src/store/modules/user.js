@@ -2,6 +2,7 @@ const user={
 
   state:{
     menus:JSON.parse(sessionStorage.getItem("menus")),
+    admin:JSON.parse(sessionStorage.getItem("admin")),
     name:'a'
   },
   mutations: {
@@ -10,6 +11,9 @@ const user={
     },
     SER_MENUS:(state,menus)=>{
       state.menus=menus
+    },
+    SET_ADMIN:(state,admin)=>{
+      state.admin=admin
     }
 
   }
