@@ -8,7 +8,7 @@ import store from './store'
 import { mapGetters,mapState } from 'vuex'
 
 import routes from './router'
-
+import {test} from "./utils/testRouter";
 import 'font-awesome/css/font-awesome.min.css'
 
 Vue.use(ElementUI)
@@ -21,6 +21,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+
+
   if (to.path == '/login') {
     sessionStorage.removeItem('user');
   }
@@ -28,12 +30,23 @@ router.beforeEach((to, from, next) => {
   if (sessionStorage.getItem('menus')==null&&to.path!='/login'){
     next('/login')
   }
+
+  let menus=store.getters.menus;
+  let router=['/404','/login']
+
+  if (router.indexOf(to.path)==-1){
+    if (menus!=null&&to.path!='/401'){
+      let bol=test(menus,to.name);
+
+      if (!bol){
+        next('/401')
+      }
+    }
+  }
+
  next()
 })
 
-//router.afterEach(transition => {
-//NProgress.done();
-//});
 
 new Vue({
 

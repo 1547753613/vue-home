@@ -7,7 +7,13 @@
     <el-form-item prop="checkPass">
       <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="密码"></el-input>
     </el-form-item>
-    <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
+    <el-form-item prop="code">
+      <el-input type="text" v-model="ruleForm2.code" auto-complete="off" placeholder="验证码" style="width:200px;"></el-input>
+      <el-image :src="code" @click="setImgCode"></el-image>
+    </el-form-item>
+<!--
+    <el-checkbox v-model="checked"  class="remember">记住密码</el-checkbox>
+-->
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">{{ mess }}</el-button>
       <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
@@ -16,15 +22,18 @@
 </template>
 
 <script>
-  import {post} from '../request/Http'
+  import {post,get} from '../request/Http'
+  import {inform} from "../utils/inform";
+
   export default {
     data() {
       return {
+        code:'http://localhost:8080/createImageCode',
         mess:'登录',
         logining: false,
         ruleForm2: {
           account: 'admin',
-          checkPass: '123456'
+          checkPass: ''
         },
         rules2: {
           account: [
@@ -34,12 +43,20 @@
           checkPass: [
             { required: true, message: '请输入密码', trigger: 'blur' },
             //{ validator: validaePass2 }
+          ],
+         code: [
+            { required: true, message: '请输入验证码', trigger: 'blur' },
+            //{ validator: validaePass2 }
           ]
         },
         checked: true
       };
     },
     methods: {
+      setImgCode(){
+
+        this.code='http://localhost:8080/createImageCode?'+new Date();
+      },
       handleReset2() {
         this.$refs.ruleForm2.resetFields();
       },
@@ -51,31 +68,45 @@
             //_this.$router.replace('/table');
             this.logining = true;
             //NProgress.start();
-            var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
+            var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass,code:this.ruleForm2.code };
             post('/my',loginParams).then(data=>{
+              console.log(data)
               if (data.code==200){
-
-
                 sessionStorage.setItem("menus",JSON.stringify(data.data.admin.menus));
-                this.logining=false;
                 this.$store.commit('SER_MENUS',data.data.admin.menus);
                 this.$router.push({ path: '/' })
               }
 
+              inform(data,()=> {
+                this.mess='登录'
+                this.ruleForm2.code=''
+                this.code='http://localhost:8080/createImageCode?'+new Date();
+                this.ruleForm2.checkPass='';
+              })
 
             })
+            this.logining=false;
           } else {
             console.log('error submit!!');
             return false;
           }
         });
       }
+    },
+    mounted(){
+      history.pushState(null, null, document.URL);
+      window.addEventListener('popstate',function () {
+        history.pushState(null, null, document.URL);
+      })
     }
   }
 
 </script>
 
 <style lang="scss" scoped>
+  img{
+    margin-top: 50px;
+  }
   .login-container {
     /*box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);*/
     -webkit-border-radius: 5px;
@@ -95,6 +126,13 @@
     }
     .remember {
       margin: 0px 0px 35px 0px;
+    }
+    .el-image {
+      width: 80px;
+      height: 30px;
+      position: absolute;
+      top: 5px;
+      left: 210px;
     }
   }
 </style>
