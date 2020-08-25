@@ -22,7 +22,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
 
-
+console.log(to.matched.length)
+  console.log(to.path)
   if (to.path == '/login') {
     sessionStorage.removeItem('user');
   }
@@ -34,7 +35,7 @@ router.beforeEach((to, from, next) => {
   let menus=store.getters.menus;
   let router=['/404','/login','/dashboard']
 
-  if (router.indexOf(to.path)==-1){
+/*  if (router.indexOf(to.path)==-1){
 
     if (menus!=null&&to.path!='/401'){
       let bol=test(menus,to.name);
@@ -43,7 +44,7 @@ router.beforeEach((to, from, next) => {
         next('/401')
       }
     }
-  }
+  }*/
 
  next()
 })

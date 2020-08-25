@@ -24,7 +24,7 @@ let routes = [
   {
     path: '/',
     component: Home,
-    name: '首页',
+    name: '',
     iconCls: 'el-icon-message',//图标样式class
     hidden:false,
     test:true,
@@ -33,8 +33,8 @@ let routes = [
       { path:'/dashboard',component:() => import('@/views/dashboard/dashboard'),name:'首页',hidden:true,test:true},
       { path: '/401', component: () => import('@/views/401'), name: 'page401'},
       {path:'/404',component:NotFound,name:'404'},
-      { path: '/main', component: Main, name: '主页' },
-      { path: '/form', component: Form, name: 'Form'}
+      { path: '/main', component: Main, name: '主页' }
+
 
     ]
   },
@@ -46,6 +46,28 @@ let routes = [
     leaf: true,//只有一个节点
     children: [
       {path:'/person',component:()=>import('@/views/person/index.vue'),name:'员工管理'}
+    ]
+  },
+
+  {
+    path: '/',
+    component: Home,
+    name: '',
+    iconCls: 'el-icon-headset',
+    leaf: true,//只有一个节点
+    children: [
+      {path:'/consult',component:()=>import('@/views/user/select.vue'),name:'用户咨询'}
+    ]
+  },
+  {
+    path: '/',
+    component: Home,
+    name: '',
+    iconCls: 'el-icon-s-tools',
+    leaf: true,//只有一个节点
+    children: [
+      {path:'authority',component:()=>import('@/views/authority/index.vue'),name:'权限管理'}
+
     ]
   },
   {
@@ -77,45 +99,13 @@ let routes = [
     children: [
       {path:'/order',component:()=>import('@/views/user/select'),name:'订单管理'}
     ]
-  },
-  {
-    path: '/',
-    component: Home,
-    name: '',
-    iconCls: 'el-icon-headset',
-    leaf: true,//只有一个节点
-    children: [
-      {path:'/consult ',component:()=>import('@/views/user/select'),name:'咨询管理'}
-    ]
-  },
-  {
-    path: '/',
-    component: Home,
-    name: '',
-    iconCls: 'el-icon-s-tools',
-    leaf: true,//只有一个节点
-    children: [
-      {path:'/consult ',component:()=>import('@/views/user/select'),name:'咨询管理'}
-
-    ]
-  },
-  {
-    path: '/',
-    component: Home,
-    name: '',
-    iconCls: 'el-icon-s-tools',
-    leaf: true,//只有一个节点
-    children: [
-      {path:'/authority ',component:()=>import('@/views/authority'),name:'权限管理'}
-
-    ]
-  },
-
+  }
+ /* ,
   {
     path: '*',
     hidden: true,
     redirect: { path: '/404' }
-  }
+  }*/
 ];
 
 export default routes;

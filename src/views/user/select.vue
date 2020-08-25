@@ -4,7 +4,10 @@
 
 <script>
     export default {
-        name: "add"
+        name: "add",
+      created(){
+          console.log("用户咨询")
+      }
     }
 </script>
 
