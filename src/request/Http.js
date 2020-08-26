@@ -17,7 +17,6 @@ function startloading() {
 axios.interceptors.request.use(
 
     config => {
-
         return config;
     },
     error => {
@@ -26,7 +25,7 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
     response => {
-
+      console.log(response)
 return response;
 
     },

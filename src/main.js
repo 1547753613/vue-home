@@ -6,11 +6,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VueRouter from 'vue-router'
 import store from './store'
 import { mapGetters,mapState } from 'vuex'
-
+import a from './request/ax';
 import routes from './router'
 import {test} from "./utils/testRouter";
 import 'font-awesome/css/font-awesome.min.css'
-
+Vue.prototype.$http=a
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 
