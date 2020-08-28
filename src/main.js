@@ -17,36 +17,36 @@ Vue.use(VueRouter)
 //NProgress.configure({ showSpinner: false });
 
 const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes
 })
 
 router.beforeEach((to, from, next) => {
 
-/*console.log(to.matched.length)
-  console.log(to.path)*/
+
   if (to.path == '/login') {
-    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('admin');
   }
-  let user = JSON.parse(sessionStorage.getItem('user'));
-  if (sessionStorage.getItem('menus')==null&&to.path!='/login'){
+  if (sessionStorage.getItem('admin')==null&&to.path!='/login'){
     next('/login')
-  }
+  }else {
 
-  let menus=store.getters.menus;
-  let router=['/404','/login','/dashboard']
+    let menus = store.getters.menus;
+    let router = ['/404', '/login', '/dashboard']
 
-  if (router.indexOf(to.path)==-1){
+    if (router.indexOf(to.path) == -1) {
 
-    if (menus!=null&&to.path!='/401'){
-      let bol=test(menus,to.name);
+      if (menus != null && to.path != '/401') {
+        let bol = test(menus, to.name);
 
-      if (!bol){
-        next('/401')
+        if (!bol) {
+          next('/401')
+        }
       }
     }
+    next()
   }
-
- next()
 })
 
 

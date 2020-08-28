@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import {get,put1} from "../../request/Http";
+  import {get,put1,post   } from "../../request/Http";
   import {inform} from "../../utils/inform";
 
   export default {
@@ -60,8 +60,6 @@
         if (null!=did) {
           get('/Department/queryrole', {did}).then(data => {
             this.role=data;
-
-           // console.log(data)
           })
         }
       },
