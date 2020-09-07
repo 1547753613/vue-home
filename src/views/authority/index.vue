@@ -4,13 +4,15 @@
       <el-collapse accordion @change="Collchange" v-model="did">
         <el-collapse-item  v-for="(i,index) in depts" :title="i.dname" :name="i.did">
           <div>
-            <el-button v-for="item in role" size="mini" @click="SelectRole(item.rid)">{{ item.rname}}</el-button>
+            <el-button v-for="item in role" size="mini" @click="SelectRole(item.rid)" :type=" item.rid==id?'primary':'type'">{{ item.rname}}</el-button>
+             <div v-if="role.length==0">暂无职位</div>
           </div>
 
 
         </el-collapse-item>
 
       </el-collapse>
+      <br/>
       <el-button :disabled="bool" size="medium" @click="setRoleAuth">修改权限</el-button>
       <el-tree
         :data="data"
@@ -37,7 +39,8 @@
             data:[],
             role:[],
             checked:[],
-            did:1
+            did:1,
+            id:0
           }
       },
     methods:{
@@ -64,6 +67,8 @@
         }
       },
       SelectRole(rid){
+
+        this.id=rid;
         this.rid=rid;
         this.bool=false;
         this.$refs.tree.setCheckedKeys([]);
@@ -73,9 +78,7 @@
               let arr=[1,2,3,4,5,6,13,]
             return arr.indexOf(item)==-1;
           });
-
         })
-       // console.log(rid)
       }
     },
       created(){
@@ -83,12 +86,17 @@
           this.data=data;
         })
         get('/Department/query').then(data=>{
-          this.depts=data
+          this.depts=data.filter(function (item,index) {
+
+            return item.did!=1006;
+
+          })
+
         })
       }
     }
 </script>
 
-<style scoped>
+<style>
 
 </style>

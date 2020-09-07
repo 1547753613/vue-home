@@ -2,7 +2,6 @@
     <div>
       <el-button @click="ADDAdmin">添加员工</el-button>
      <el-table
-
        :row-class-name="tableRowClassName"
         :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
         style="width: 100%;">
@@ -69,11 +68,11 @@
               placeholder="输入关键字搜索"/>
           </template>
           <template slot-scope="scope">
-            <el-button
+            <el-button v-if="scope.row.rid!=1"
               size="mini"
               @click="handleEdit(scope.$index, scope.row,'修改')"
             >修改</el-button>
-            <el-button v-if="scope.row.isenble==1&&admin.id!=scope.row.id"
+            <el-button v-if="scope.row.isenble==1&&admin.id!=scope.row.id&&scope.row.rid!=1"
                        size="mini"
                        type="danger"
                 @click="stateDialog(scope.$index, scope.row,'锁定')"
@@ -297,19 +296,11 @@ import {testauth} from "../../utils/testRouter";
         post('/Department/query').then(data=>{
         //  console.log(this.admin.rid)
           if (this.admin.rid!=1){
-
             this.depts=data.filter(function (item,index) {
-
               return item.did!=1006;
-
             })
           }
           this.depts=data;
-
-
-
-
-
         })
 
         pageAdmin(null,null,this);
@@ -452,6 +443,7 @@ import {testauth} from "../../utils/testRouter";
             }
           })
         }else {
+
           put1('/person/enlock', {id: this.person.id}).then(data => {
             if (data.code == 200) {
               success(data.msg, () => {
@@ -507,10 +499,10 @@ import {testauth} from "../../utils/testRouter";
 
 <style>
   .el-table .row{
-      background: #99FF99
+    background: oldlace;
 
     }
- .el-form .el-input{
+  .el-dialog  .el-form .el-input{
     width: 220px;
   }
 </style>

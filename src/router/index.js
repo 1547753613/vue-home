@@ -56,7 +56,7 @@ let routes = [
     iconCls: 'el-icon-headset',
     leaf: true,//只有一个节点
     children: [
-      {path:'/consult',component:()=>import('@/views/user/select.vue'),name:'用户咨询'}
+      {path:'/consult',component:()=>import('@/views/user/add.vue'),name:'用户咨询'}
     ]
   },
   {
@@ -74,10 +74,20 @@ let routes = [
     path: '/',
     component: Home,
     name: '',
+    iconCls: 'el-icon-s-custom',
+    leaf: true,//只有一个节点
+    children: [
+      {path:'/landlord',component:()=>import('@/views/landlord'),name:'房东管理'}
+    ]
+  },
+  {
+    path: '/',
+    component: Home,
+    name: '',
     iconCls: 'el-icon-s-shop',
     leaf: true,//只有一个节点
     children: [
-      {path:'/landlord',component:()=>import('@/views/user/select'),name:'房东管理'}
+      {path:'/house',component:()=>import('@/views/house'),name:'房屋管理'}
     ]
   },
   {
@@ -87,7 +97,7 @@ let routes = [
     iconCls: 'el-icon-user',
     leaf: true,//只有一个节点
     children: [
-      {path:'/user',component:()=>import('@/views/user/select'),name:'用户管理'}
+      {path:'/user',component:()=>import('@/views/user/add'),name:'用户管理'}
     ]
   },
   {
@@ -97,7 +107,7 @@ let routes = [
     iconCls: 'el-icon-s-goods',
     leaf: true,//只有一个节点
     children: [
-      {path:'/order',component:()=>import('@/views/user/select'),name:'订单管理'}
+      {path:'/order',component:()=>import('@/views/order'),name:'订单管理'}
     ]
   }
  /* ,

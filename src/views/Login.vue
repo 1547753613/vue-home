@@ -70,6 +70,7 @@
             //NProgress.start();
             var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass,code:this.ruleForm2.code };
             post('/my',loginParams).then(data=>{
+              console.log(data)
               if (data.code==200){
                 sessionStorage.setItem("menus",JSON.stringify(data.data.admin.menus));
                 sessionStorage.setItem("admin",JSON.stringify(data.data.admin))

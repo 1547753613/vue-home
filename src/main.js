@@ -10,10 +10,21 @@ import a from './request/ax';
 import routes from './router'
 import {test} from "./utils/testRouter";
 import 'font-awesome/css/font-awesome.min.css'
+import {get,put1,post,put} from "./request/Http";
+import Viewer from 'v-viewer'
+import 'viewerjs/dist/viewer.css'
+import Chat from 'jwchat';
+Vue.use(Viewer)
+Viewer.setDefaults({
+  Options: { 'inline': true, 'button': true, 'navbar': true, 'title': true, 'toolbar': true, 'tooltip': true, 'movable': true, 'zoomable': true, 'rotatable': true, 'scalable': true, 'transition': true, 'fullscreen': true, 'keyboard': true, 'url': 'data-source' }
+})
+Vue.prototype.$get=get;
+Vue.prototype.$post=post;
+Vue.prototype.$put=put1;
 Vue.prototype.$http=a
-Vue.use(ElementUI)
 Vue.use(VueRouter)
-
+Vue.use(ElementUI, { zIndex: 1000 })
+Vue.use(Chat)
 //NProgress.configure({ showSpinner: false });
 
 const router = new VueRouter({
