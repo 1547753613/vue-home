@@ -49,7 +49,7 @@ let routes = [
     ]
   },
 
-  {
+ /* {
     path: '/',
     component: Home,
     name: '',
@@ -58,7 +58,7 @@ let routes = [
     children: [
       {path:'/consult',component:()=>import('@/views/user/add.vue'),name:'用户咨询'}
     ]
-  },
+  },*/
   {
     path: '/',
     component: Home,
@@ -97,7 +97,7 @@ let routes = [
     iconCls: 'el-icon-user',
     leaf: true,//只有一个节点
     children: [
-      {path:'/user',component:()=>import('@/views/user/add'),name:'用户管理'}
+      {path:'/user',component:()=>import('@/views/user/index'),name:'用户管理'}
     ]
   },
   {

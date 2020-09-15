@@ -53,9 +53,9 @@
        </div>
      </section>
    </el-col>
-    <el-col :span="1" class="footer">
+   <!-- <el-col :span="1" class="footer">
       <div class="d1" ><i class="el-icon-s-comment"></i> </div>
-    </el-col>
+    </el-col>-->
 	</el-row>
 
 </template>

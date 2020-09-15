@@ -3,6 +3,8 @@ import App from './App'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 //import './assets/theme/theme-green/index.css'
+import VCharts from 'v-charts'
+
 import VueRouter from 'vue-router'
 import store from './store'
 import { mapGetters,mapState } from 'vuex'
@@ -14,6 +16,8 @@ import {get,put1,post,put} from "./request/Http";
 import Viewer from 'v-viewer'
 import 'viewerjs/dist/viewer.css'
 import Chat from 'jwchat';
+Vue.use(VCharts)
+
 Vue.use(Viewer)
 Viewer.setDefaults({
   Options: { 'inline': true, 'button': true, 'navbar': true, 'title': true, 'toolbar': true, 'tooltip': true, 'movable': true, 'zoomable': true, 'rotatable': true, 'scalable': true, 'transition': true, 'fullscreen': true, 'keyboard': true, 'url': 'data-source' }

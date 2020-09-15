@@ -4,6 +4,10 @@
       <h4>数据展示</h4>
       <nx-data-display :option="option" />
     </div>
+    <div class="item">
+      <h4>近一周成交量</h4>
+      <discount-figure></discount-figure>
+    </div>
 
   </div>
 </template>
@@ -11,11 +15,12 @@
 <script>
 
 import nxDataDisplay from '@/components/nx-data-display/nx-data-display'
-
+import DiscountFigure from '@/views/charts/DiscountFigure'
 export default {
   name: 'Report',
   components: {
-    nxDataDisplay
+    nxDataDisplay,
+    DiscountFigure
   },
   data() {
     return {
@@ -25,15 +30,15 @@ export default {
         data: [
           {
             count: 1000,
-            title: '日活跃数'
+            title: '昨日订单'
           },
           {
             count: 3000,
-            title: '月活跃数'
+            title: '本月订单'
           },
           {
             count: 20000,
-            title: '年活跃数'
+            title: '历史订单量'
           }
         ]
       },
@@ -179,10 +184,22 @@ export default {
       }
     }
   },
-  computed: {},
+  computed: {
+
+  },
   watch: {},
   created() {},
-  mounted() {}
+  mounted() {
+    this.$get('/test/SelectOrdersCount',{date:'count'}).then(data=>{
+        this.option.data[2].count=data;
+    })
+    this.$get('/test/SelectOrdersCount',{date:'month'}).then(data=>{
+      this.option.data[1].count=data;
+    })
+    this.$get('/test/SelectOrdersCount',{date:'day'}).then(data=>{
+      this.option.data[0].count=data;
+    })
+  }
 }
 </script>
 

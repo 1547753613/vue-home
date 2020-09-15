@@ -45,7 +45,7 @@
           prop="houseAddress.city"
           width="200">
         </el-table-column>
-        <el-table-column
+        <!--<el-table-column
           label="入住数"
           prop="houseGeneralize.area"
           width="100">
@@ -54,7 +54,7 @@
           label="好评率"
           prop="houseGeneralize.area"
           width="100">
-        </el-table-column>
+        </el-table-column>-->
         <el-table-column
           fixed="right"
           align="left"
@@ -70,12 +70,12 @@
                        @click="houseDetails(scope.$index, scope.row)"
             >查看详情</el-button>
 
-            <el-button
+      <!--      <el-button
                        size="mini"
                        type="primary"
                        >
               禁用
-            </el-button>
+            </el-button>-->
 
           </template>
         </el-table-column>

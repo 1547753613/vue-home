@@ -30,7 +30,7 @@
         <el-table-column
           label="身份证号"
           prop="idcard"
-          width="200">
+          width="190">
         </el-table-column>
 
         <el-table-column
